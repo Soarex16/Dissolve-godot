@@ -4,7 +4,7 @@
 [ext_resource path="res://albedo.png" type="Texture" id=2]
 [ext_resource path="res://noise.png" type="Texture" id=3]
 
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=1]
 
 background_mode = 1
 background_sky_custom_fov = 0.0
@@ -83,7 +83,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Ambient Light", "Background", "Glow", "Glow/levels" ]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=2]
 
 code = "shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
@@ -132,10 +132,10 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 
 render_priority = 0
-shader = SubResource( 1 )
+shader = SubResource( 2 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/specular = 0.5
 shader_param/metallic = 0.0
@@ -179,7 +179,7 @@ tracks/0/keys = {
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
 
-environment = SubResource( 3 )
+environment = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="1"]
 
@@ -194,12 +194,13 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = ExtResource( 1 )
 skeleton = NodePath("..")
-material/0 = SubResource( 2 )
+material/0 = SubResource( 3 )
 _sections_unfolded = [ "material" ]
 
 [node name="Camera" type="Camera" parent="MeshInstance" index="0"]
 
 transform = Transform( 0.936704, -0.228038, 0.265675, 0.0685127, 0.863523, 0.499634, -0.343352, -0.449807, 0.824489, 1.04662, 1.33528, 3.22917 )
+visible = false
 keep_aspect = 1
 cull_mask = 1048575
 environment = null
